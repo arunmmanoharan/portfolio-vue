@@ -7,12 +7,6 @@
                 <NavLink :name="navigationItem.name" :link="navigationItem.link"></NavLink>
             </li>
         </ul>
-        <button id="goToAngular" :class="{ 'hidden-button': !showButton }" style="margin-right: 20px"
-                v-on:click="goToAngular"> Switch to Angular Version
-        </button>
-        <button id="goToReact" :class="{ 'hidden-button': !showButton }" v-on:click="goToReact"> Switch to React
-            Version
-        </button>
     </nav>
 </template>
 
@@ -20,9 +14,6 @@
 	import navigation from '../../constants/navigationConstants';
 	import NavLink from './NavLink';
 	import {keys, map} from 'lodash';
-	import {ANGULAR_URL, REACT_URL} from '../../constants/URL_Constants';
-
-	const OFFSET = 60;
 
 	export default {
 		name: 'NavBar',
@@ -36,48 +27,8 @@
 							name
 						};
 					}
-				),
-				showButton: false,
-				lastScrollPosition: 0,
-				scrollValue: 0
+				)
 			};
-		},
-		mounted() {
-			this.lastScrollPosition = window.pageYOffset;
-			window.addEventListener('scroll', this.onScroll);
-			const viewportMeta = document.createElement('meta');
-			viewportMeta.name = 'viewport';
-			viewportMeta.content = 'width=device-width, initial-scale=1';
-			document.head.appendChild(viewportMeta);
-		},
-
-		beforeDestroy() {
-			window.removeEventListener('scroll', this.onScroll);
-		},
-
-		methods: {
-			onScroll() {
-				if (window.pageYOffset < 0) {
-					return;
-				}
-				if (Math.abs(window.pageYOffset - this.lastScrollPosition) < OFFSET) {
-					return;
-				}
-				this.showButton = window.pageYOffset > this.lastScrollPosition;
-				this.lastScrollPosition = window.pageYOffset;
-			},
-			goToAngular() {
-				window.open(ANGULAR_URL, '_self');
-			},
-			goToReact() {
-				window.open(REACT_URL, '_self');
-			}
 		}
 	};
 </script>
-
-<style>
-    .hidden-button {
-        display: none;
-    }
-</style>

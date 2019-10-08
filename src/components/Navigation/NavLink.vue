@@ -4,12 +4,14 @@
        v-on:mouseover="mouseOver"
        v-on:mouseleave="mouseLeave"
        v-bind:style="styleObject"
-       :href="'#' + link">
+       :href="navigateURL(link)">
         {{name}}
     </a>
 </template>
 
 <script>
+	import {startsWith} from 'lodash';
+
 	export default {
 		name: 'NavLink',
 		props: {
@@ -29,6 +31,9 @@
 			},
 			mouseLeave: function () {
 				this.styleObject.color = '#FFFFFF';
+			},
+			navigateURL: function (url) {
+				return startsWith(url, 'http') ? url : `#${url}`;
 			}
 		}
 	};
