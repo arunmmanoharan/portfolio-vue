@@ -1,5 +1,7 @@
 # portfolio-vuejs
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/a2441918/portfolio-vue.svg)](https://greenkeeper.io/)
+
 ## Project setup
 ```
 npm install
